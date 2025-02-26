@@ -316,6 +316,35 @@ const ChatResponseBox = ({ chatId, initialMessages }: ChatResponseBoxProps) => {
         const lastMessageId = lastAssistantMessage.id;
 
         switch (toolName) {
+          case "listObjectsInArea": {
+            const {
+              boxes,
+            } = result;
+
+            startTransition(() => {
+              // Add the result to the message state
+              setMessageResults((prev) => ({
+                ...prev,
+                [lastMessageId]: {
+                  ...prev[lastMessageId],
+                  listObjectsInArea: {
+                    boxes,
+                  },
+                },
+              }));
+
+              // Add a map layer
+              addMapLayer({
+                id: generateUUID(),
+                name: "Listed Objects",
+                visible: true,
+                type: "boxes",
+                roiName: "",  // TODO: Add ROI name
+                boxes: boxes,
+              });
+            });
+            break;
+          }
           /////////////////////////////////////////////////////////////////////////
           // 1. Handle Geospatial ANALYSIS
           /////////////////////////////////////////////////////////////////////////

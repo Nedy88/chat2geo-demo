@@ -11,6 +11,7 @@ import { useButtonsStore } from "@/stores/use-buttons-store";
 import useBasemapToggle from "./use-basemap-toggle";
 import useAddArcGisLayers from "./use-add-arcgis-layers";
 import useAddAttachedLayers from "./use-add-attached-layers";
+import useAddBoundingBoxes from "./use-add-bounding-boxes";
 
 export default function useMap(containerId: string) {
   // We keep this in useState in case you need to return or further manipulate the map
@@ -33,6 +34,8 @@ export default function useMap(containerId: string) {
 
   // Add GEE layers
   useAddGeeLayers(mapInstance);
+
+  useAddBoundingBoxes(mapInstance);
 
   useAddArcGisLayers(mapInstance);
 

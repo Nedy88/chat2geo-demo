@@ -335,10 +335,11 @@ interface MapLayer {
   id: string;
   name: string;
   visible: boolean;
-  type: "raster" | "roi";
+  type: "raster" | "roi" | "boxes";
   layerOpacity?: number;
   mapStats?: Record<string, any>;
   uhiMetrics?: UHIMetrics | null;
   layerFunctionType?: string;
   roiName: string | null;
+  boxes?: GeoObject[];
 }

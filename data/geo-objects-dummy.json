@@ -1,0 +1,23 @@
+[
+    {
+        category: "Building",
+        long_min: 23.37109148410383,
+        long_max: 23.372019262661297,
+        lat_min: 42.669613010609396,
+        lat_max: 42.67030561974849,
+    },
+    {
+        category: "Building",
+        long_min: 23.371853587775547,
+        long_max: 23.372795567025662,
+        lat_min: 42.67037870801565,
+        lat_max: 42.67103998514318,
+    },
+    {
+        category: "Football playground",
+        long_min: 23.37483626889562,
+        long_max: 23.37550370142975,
+        lat_min: 42.66948932848061,
+        lat_max: 42.66994178848594,
+    },
+]
