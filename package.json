@@ -44,6 +44,7 @@
     "@turf/turf": "^7.1.0",
     "@types/mapbox-gl": "^3.4.0",
     "@types/proj4": "^2.5.5",
+    "@types/rbush": "^4.0.0",
     "@types/shpjs": "^3.4.7",
     "@vercel/analytics": "^1.4.1",
     "@xyflow/react": "^12.3.5",
@@ -70,6 +71,7 @@
     "pdf-lib": "^1.17.1",
     "pdf-parse": "^1.1.1",
     "pdfjs-dist": "^4.9.155",
+    "rbush": "^4.0.1",
     "react": "^19.0.0",
     "react-colorful": "^5.6.1",
     "react-dom": "^19.0.0",
@@ -105,6 +107,7 @@
     "eslint": "^8",
     "eslint-config-next": "15.1.0",
     "postcss": "^8",
+    "prettier": "^3.5.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   },
