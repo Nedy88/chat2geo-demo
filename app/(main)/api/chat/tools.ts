@@ -49,8 +49,6 @@ function implListObjectsInArea(category: string, selectedRoiGeometryInChat: any,
       error: `The area of the selected region of interest (ROI) is ${areaSqKm} sq km, which exceeds the maximum area limit of ${maxArea} sq km. Please select a smaller ROI and try again.`,
     };
   }
-  console.log("selectedRoiGeometryInChat", JSON.stringify(selectedRoiGeometryInChat, null, 2));
-  console.log("selectedRoiGeometry", JSON.stringify(selectedRoiGeometry, null, 2));
   const boxes = queryByCategoryInPolygon(category, selectedRoiGeometry.coordinates[0]);
 
   // const boxes = [
@@ -75,18 +73,20 @@ function implListObjectsInArea(category: string, selectedRoiGeometryInChat: any,
 }
 
 const listObjectsInAreaTool = (selectedRoiGeometryInChat: any, maxArea: number) => ({
-  description: `List all geo objects of a specific category.
+  description: `List all geo objects of a specific category in a given area defined by a polygon.
+    Do not worry about the regoin of interest (ROI polygon) it will be provided automatically to the tool.
       The returned value will be a list of objects containing the following fields:
       - category: string
       - long_min: number
       - long_max: number
       - lat_min: number
       - lat_max: number.
-      Format the output in a markdown table.`,
+      Provide a clear and succinct summary of the results like the count of the objects.
+      Provide a markdown formatted table with the results, BUT ONLY IF THEY ARE LESS THAN 5.`,
   parameters: z.object({
     category: z.string()
       .describe(`The category of object to list. It can be one of the following:
-          'Building', 'Football playground'.`),
+          'Building', 'Football playground' or 'Tenis court'.`),
   }),
   execute: async ({ category }: { category: string }) => {
     return implListObjectsInArea(category, selectedRoiGeometryInChat, maxArea);
