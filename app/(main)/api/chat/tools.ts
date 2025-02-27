@@ -1,7 +1,80 @@
-import { GeoObject } from "@/lib/spatial-index";
+import { calculateGeometryArea, checkGeometryAreaIsLessThanThreshold } from "@/features/maps/utils/geometry-utils";
+import { GeoObject, queryByCategoryInPolygon } from "@/lib/spatial-index";
+import { queryObjects } from "v8";
 import { z } from "zod";
 
-const listObjectsInAreaTool = {
+function implListObjectsInArea(category: string, selectedRoiGeometryInChat: any, maxArea: number) {
+  const selectedRoiGeometry = selectedRoiGeometryInChat?.geometry;
+  if (!selectedRoiGeometry) {
+    return {
+      error:
+        "It seems you didn't provide a valid region of interest (ROI) for the analysis. you need to provide an ROI through importing a shapefile/geojson file or drawing a shape on the map.",
+    };
+  }
+
+  if (
+    selectedRoiGeometry.type !== "Polygon" &&
+    selectedRoiGeometry.type !== "MultiPolygon" &&
+    selectedRoiGeometry.type !== "FeatureCollection"
+  ) {
+    return {
+      error:
+        "Selected ROI geometry must be a Polygon, MultiPolygon, or a FeatureCollection of polygons.",
+    };
+  }
+
+  // If it's a FeatureCollection, ensure every feature's geometry is a Polygon or MultiPolygon.
+  if (selectedRoiGeometry.type === "FeatureCollection") {
+    for (const feature of selectedRoiGeometry.features) {
+      if (
+        !feature.geometry ||
+        (feature.geometry.type !== "Polygon" &&
+          feature.geometry.type !== "MultiPolygon")
+      ) {
+        return {
+          error: "All features in the ROI must be polygons.",
+        };
+      }
+    }
+  }
+
+  const geometryAreaCheckResult = checkGeometryAreaIsLessThanThreshold(
+    selectedRoiGeometryInChat?.geometry,
+    maxArea
+  );
+
+  const areaSqKm = calculateGeometryArea(selectedRoiGeometryInChat?.geometry);
+  if (!geometryAreaCheckResult) {
+    return {
+      error: `The area of the selected region of interest (ROI) is ${areaSqKm} sq km, which exceeds the maximum area limit of ${maxArea} sq km. Please select a smaller ROI and try again.`,
+    };
+  }
+  console.log("selectedRoiGeometryInChat", JSON.stringify(selectedRoiGeometryInChat, null, 2));
+  console.log("selectedRoiGeometry", JSON.stringify(selectedRoiGeometry, null, 2));
+  const boxes = queryByCategoryInPolygon(category, selectedRoiGeometry.coordinates[0]);
+
+  // const boxes = [
+  //   {
+  //     category: "Building",
+  //     long_min: 23.37109148410383,
+  //     long_max: 23.372019262661297,
+  //     lat_min: 42.669613010609396,
+  //     lat_max: 42.67030561974849,
+  //   },
+  //   {
+  //     category: "Building",
+  //     long_min: 23.371853587775547,
+  //     long_max: 23.372795567025662,
+  //     lat_min: 42.67037870801565,
+  //     lat_max: 42.67103998514318,
+  //   },
+  // ] as GeoObject[];
+  return {
+    boxes: boxes,
+  };
+}
+
+const listObjectsInAreaTool = (selectedRoiGeometryInChat: any, maxArea: number) => ({
   description: `List all geo objects of a specific category.
       The returned value will be a list of objects containing the following fields:
       - category: string
@@ -16,29 +89,10 @@ const listObjectsInAreaTool = {
           'Building', 'Football playground'.`),
   }),
   execute: async ({ category }: { category: string }) => {
-    console.log(`Listing objects of category ${category}`);
-    const boxes = [
-      {
-        category: "Building",
-        long_min: 23.37109148410383,
-        long_max: 23.372019262661297,
-        lat_min: 42.669613010609396,
-        lat_max: 42.67030561974849,
-      },
-      {
-        category: "Building",
-        long_min: 23.371853587775547,
-        long_max: 23.372795567025662,
-        lat_min: 42.67037870801565,
-        lat_max: 42.67103998514318,
-      },
-    ] as GeoObject[];
-    return {
-      boxes: boxes,
-    };
-  }
-};
+    return implListObjectsInArea(category, selectedRoiGeometryInChat, maxArea);
+  },
+});
 
-export const geoTools = {
-  listObjectsInArea: listObjectsInAreaTool,
-}
+export const geoTools = (selectedRoiGeometryInChat: any, maxArea: number) => ({
+  listObjectsInArea: listObjectsInAreaTool(selectedRoiGeometryInChat, maxArea),
+})

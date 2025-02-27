@@ -164,7 +164,7 @@ export async function POST(request: Request) {
         }
       }
     },
-    tools: geoTools,
+    tools: geoTools(selectedRoiGeometryInChat, maxArea),
 
   });
 
