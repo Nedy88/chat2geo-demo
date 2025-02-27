@@ -39,52 +39,7 @@ export function CapabilitiesBanner() {
               <p className="font-semibold mb-1">Platform Capabilities:</p>
               <ul className="list-none space-y-2 pl-4">
                 <li>
-                  <span className="mr-2">⚡</span>Real-time geospatial analysis
-                </li>
-                <li>
-                  <span className="mr-2">📚</span>Knowledge Base queries using
-                  your docs
-                </li>
-                <li>
-                  <span className="mr-2">📝</span>Drafting summary reports
-                </li>
-              </ul>
-            </div>
-
-            {/* Group 2: Geospatial Analyses */}
-            <div className="text-left">
-              <p className="font-semibold mb-1">Geospatial Analyses:</p>
-              <ul className="list-none space-y-2 pl-4">
-                <li>
-                  <span className="mr-2">🗺️</span>Land-use/land-cover mapping
-                </li>
-                <li>
-                  <span className="mr-2">🔄</span>Bi-Temporal Change detection
-                </li>
-                <li>
-                  <span className="mr-2">🏙️</span>Urban heat island analysis
-                </li>
-                <li>
-                  <span className="mr-2">🌫️</span>
-                  Air pollution assessment
-                </li>
-              </ul>
-            </div>
-
-            {/* Group 3: Google Earth Engine Data Loading */}
-            <div className="text-left">
-              <p className="font-semibold mb-1">
-                Google Earth Engine (GEE) Data Loading (Experimental):
-              </p>
-              <ul className="list-none space-y-2 pl-4">
-                <li>
-                  <span className="mr-2">🌍</span>Load any raster dataset
-                  available on GEE
-                </li>
-
-                <li>
-                  <span className="mr-2">🔍</span>Access to a wide range of GEE
-                  datasets with a single prompt!
+                  <span className="mr-2">⚡</span>Query for object detection in satellite imagery.
                 </li>
               </ul>
             </div>
@@ -97,18 +52,8 @@ export function CapabilitiesBanner() {
                   <strong>Role:</strong> {userRole || "USER"}
                 </li>
                 <li>
-                  You can store up to <strong>{maxDocs || "N/A"}</strong>{" "}
-                  documents for Knowledge Base queries.
-                </li>
-                <li>
-                  No analyses are available for <strong>2025</strong> yet.
-                </li>
-                <li>
                   Maximum area per request is{" "}
                   <strong>{maxArea || "N/A"}</strong> &nbsp;sq km.
-                </li>
-                <li>
-                  Analyses start from <strong>2015</strong>.
                 </li>
               </ul>
             </div>
