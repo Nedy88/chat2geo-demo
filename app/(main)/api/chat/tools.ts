@@ -51,22 +51,6 @@ function implListObjectsInArea(category: string, selectedRoiGeometryInChat: any,
   }
   const boxes = queryByCategoryInPolygon(category, selectedRoiGeometry.coordinates[0]);
 
-  // const boxes = [
-  //   {
-  //     category: "Building",
-  //     long_min: 23.37109148410383,
-  //     long_max: 23.372019262661297,
-  //     lat_min: 42.669613010609396,
-  //     lat_max: 42.67030561974849,
-  //   },
-  //   {
-  //     category: "Building",
-  //     long_min: 23.371853587775547,
-  //     long_max: 23.372795567025662,
-  //     lat_min: 42.67037870801565,
-  //     lat_max: 42.67103998514318,
-  //   },
-  // ] as GeoObject[];
   return {
     boxes: boxes,
   };
@@ -82,7 +66,8 @@ const listObjectsInAreaTool = (selectedRoiGeometryInChat: any, maxArea: number) 
       - lat_min: number
       - lat_max: number.
       Provide a clear and succinct summary of the results like the count of the objects.
-      Provide a markdown formatted table with the results, BUT ONLY IF THEY ARE LESS THAN 5.`,
+      Provide a markdown formatted table with the results,
+      but only if the number of results is less then 6.`,
   parameters: z.object({
     category: z.string()
       .describe(`The category of object to list. It can be one of the following:
