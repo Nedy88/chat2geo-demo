@@ -327,8 +327,8 @@ const ChatResponseBox = ({ chatId, initialMessages }: ChatResponseBoxProps) => {
                 ...prev,
                 [lastMessageId]: {
                   ...prev[lastMessageId],
-                  listObjectsInArea: {
-                    boxes,
+                  boundingBoxes: {
+                    layerName: "Listed Objects",
                   },
                 },
               }));

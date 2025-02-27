@@ -48,5 +48,12 @@ export function validateToolCallingResults(
     validationResults.draftedReport = false;
   }
 
+  if (messageResults.boundingBoxes) {
+    const { layerName } = messageResults.boundingBoxes;
+    validationResults.boundingBoxes = !!layerName;
+  } else {
+    validationResults.boundingBoxes = false;
+  }
+
   return validationResults;
 }

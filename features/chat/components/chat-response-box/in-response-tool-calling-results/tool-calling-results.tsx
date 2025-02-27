@@ -18,6 +18,7 @@ const ToolCallingResults = React.memo(
     const reportFileName = messageResults?.reportFileName;
 
     const geospatialAnalysis = messageResults?.geospatialAnalysis;
+    const boundingBoxes = messageResults?.boundingBoxes;
 
     const geospatialData = messageResults?.geospatialData;
 
@@ -42,6 +43,16 @@ const ToolCallingResults = React.memo(
             <div className="w-full flex justify-start ml-20">
               <DisplayInChatAnalysisMapBtn
                 analysisLayerName={geospatialAnalysis.layerName || ""}
+              />
+            </div>
+          </div>
+        )}
+
+        {boundingBoxes && validationResults.boundingBoxes && (
+          <div className="flex flex-col h-full gap-8 justify-center items-center">
+            <div className="w-full flex justify-start ml-20">
+              <DisplayInChatAnalysisMapBtn
+                analysisLayerName={boundingBoxes.layerName || ""}
               />
             </div>
           </div>

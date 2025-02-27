@@ -193,10 +193,18 @@ interface GeospatialAnalysisResult {
 }
 
 /**
+  * Bounding boxes results from object detection queries.
+  */
+interface BoudingBoxesResult {
+  layerName?: string;
+}
+
+/**
  * Tool Calling Message Results
  */
 interface ToolCallingMessageResults {
   geospatialAnalysis?: GeospatialAnalysisResult;
+  boundingBoxes?: BoudingBoxesResult;
   geospatialData?: any;
   citationSources?: Source[];
   draftedReport?: string;
