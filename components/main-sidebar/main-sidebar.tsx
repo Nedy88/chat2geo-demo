@@ -92,46 +92,7 @@ const MainSidebar = () => {
               <span className="whitespace-nowrap">Session History</span>
             )}
           </button>
-          <button
-            className={getButtonClasses(Pages.KnowledgeBase)}
-            data-tooltip-content="Manage knowledge base documents"
-            data-tooltip-id="knowledge-base"
-            onClick={() => handleOpenPage(Pages.KnowledgeBase)}
-          >
-            <IconDatabaseImport
-              stroke={1.5}
-              className="h-7 w-7 flex-shrink-0"
-            />
-            {!isSidebarCollapsed && (
-              <span className="whitespace-nowrap">Knowledge Base</span>
-            )}
-          </button>
 
-          <button
-            className={getButtonClasses(Pages.Integrations)}
-            data-tooltip-content="Manage integrations"
-            data-tooltip-id="integrations"
-            onClick={() => handleOpenPage(Pages.Integrations)}
-          >
-            <IconCirclesRelation
-              stroke={1.5}
-              className="h-7 w-7 flex-shrink-0"
-            />
-            {!isSidebarCollapsed && (
-              <span className="whitespace-nowrap">Integrations</span>
-            )}
-          </button>
-
-          {/* Feedback Button (placed inside nav, using same style) */}
-          <button
-            onClick={() => setIsFeedbackOpen(true)}
-            className={getButtonClasses(Pages.NewChat, "mb-3 translate-y-10")}
-            data-tooltip-content="Send feedback"
-            data-tooltip-id="feedback"
-          >
-            <IconMessage stroke={1.5} className="h-7 w-7 flex-shrink-0" />
-            {!isSidebarCollapsed && <span>Feedback</span>}
-          </button>
         </nav>
 
         {/* Footer */}
