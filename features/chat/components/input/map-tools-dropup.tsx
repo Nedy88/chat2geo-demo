@@ -58,9 +58,11 @@ const MapToolsDropup = ({ onOpenAssetSrouces }: MapToolsDropupProps) => {
             </div>
             <Separator className="mb-2" />
             <SelectRoiOnMapBtn setIsDropupOpen={setIsDropupOpen} />
+            {/*
             <OpenDatabaseInChatInputBtn
               onOpenAssetSrouces={onOpenAssetSrouces}
             />
+            */}
           </div>
         )}
         <Tooltip>

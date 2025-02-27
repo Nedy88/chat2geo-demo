@@ -49,6 +49,8 @@ export const ChatInputButtons = ({
     <TooltipProvider>
       <div className="z-[1000]">
         {/* Attach Files Button */}
+        {/* TODO(Nedyalko): This leaves a gap that I don't know how to fix. */}
+        {/*
         <Tooltip>
           <TooltipTrigger asChild>
             <button
@@ -60,6 +62,7 @@ export const ChatInputButtons = ({
           </TooltipTrigger>
           <TooltipContent side="top">Attach files</TooltipContent>
         </Tooltip>
+        */}
 
         {/* Additional Dropup Buttons */}
         {/* <AssistantsListInChatInputBoxBtn /> */}
