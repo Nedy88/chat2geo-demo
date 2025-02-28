@@ -20,7 +20,7 @@ interface RBushEntry {
 // Create a spatial index of our data
 const tree = new RBush<RBushEntry>();
 
-import geoData from "../data/geo-objects-dummy.json";
+import geoData from "../data/geo-objects-demo.json";
 
 export function initSpatialIndex() {
   const entries: RBushEntry[] = geoData.map((obj) => ({
